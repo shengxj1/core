@@ -4,7 +4,7 @@
   "packageManager": "pnpm@9.12.3",
   "type": "module",
   "scripts": {
-    "dev": "node scripts/dev.js vue vue-vapor",
+    "dev": "node scripts/dev.js vue",
     "build": "node scripts/build.js",
     "build-dts": "tsc -p tsconfig.build.json --noCheck && rollup -c rollup.dts.config.js",
     "clean": "rimraf --glob packages/*/dist temp .eslintcache",
@@ -44,7 +44,8 @@
     "postinstall": "simple-git-hooks"
   },
   "simple-git-hooks": {
-    "pre-commit": "pnpm lint-staged"
+    "pre-commit": "pnpm lint-staged && pnpm check",
+    "commit-msg": "node scripts/verify-commit.js"
   },
   "lint-staged": {
     "*.{js,json}": [
